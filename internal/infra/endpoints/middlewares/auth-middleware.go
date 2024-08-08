@@ -1,15 +1,16 @@
 package middlewares
 
 import (
+	"database/sql"
 	"os"
 
 	"github.com/gofiber/fiber/v3"
-	"github.com/henrique998/go-auth-2/internal/infra/database"
-	"github.com/henrique998/go-auth-2/internal/infra/database/repositories"
-	"github.com/henrique998/go-auth-2/internal/infra/utils"
+	"github.com/henrique998/go-auth/internal/infra/database"
+	"github.com/henrique998/go-auth/internal/infra/database/repositories"
+	"github.com/henrique998/go-auth/internal/infra/utils"
 )
 
-func AuthMiddleware() fiber.Handler {
+func AuthMiddleware(db *sql.DB) fiber.Handler {
 	return func(c fiber.Ctx) error {
 		db := database.ConnectToDb()
 		defer db.Close()
@@ -28,9 +29,7 @@ func AuthMiddleware() fiber.Handler {
 			})
 		}
 
-		repo := repositories.PGAccountsRepository{
-			Db: db,
-		}
+		repo := repositories.PGAccountsRepository{Db: db}
 
 		account := repo.FindById(accountId)
 

@@ -2,8 +2,8 @@ package utils
 
 import (
 	"github.com/golang-jwt/jwt/v5"
-	appError "github.com/henrique998/go-auth-2/internal/app/errors"
-	"github.com/henrique998/go-auth-2/internal/configs/logger"
+	appError "github.com/henrique998/go-auth/internal/app/errors"
+	"github.com/henrique998/go-auth/internal/configs/logger"
 )
 
 func ParseJWTToken(cookie, secret string) (string, appError.AppErr) {

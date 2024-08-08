@@ -1,14 +1,20 @@
 package createaccountusecase
 
 import (
-	"github.com/henrique998/go-auth-2/internal/app/repositories"
-	"github.com/henrique998/go-auth-2/internal/app/usecases"
+	"github.com/henrique998/go-auth/internal/app/contracts"
+	"github.com/henrique998/go-auth/internal/app/usecases"
 )
 
 type createAccountUsecase struct {
-	repo repositories.AccountsRepository
+	repo          contracts.AccountsRepository
+	vcRepo        contracts.VerificationCodesRepository
+	emailProvider contracts.EmailProvider
 }
 
-func NewCreateAccountUseCase(repo repositories.AccountsRepository) usecases.CreateAccountUsecase {
-	return &createAccountUsecase{repo: repo}
+func NewCreateAccountUseCase(repo contracts.AccountsRepository, vcRepo contracts.VerificationCodesRepository, emailProvider contracts.EmailProvider) usecases.CreateAccountUsecase {
+	return &createAccountUsecase{
+		repo:          repo,
+		vcRepo:        vcRepo,
+		emailProvider: emailProvider,
+	}
 }

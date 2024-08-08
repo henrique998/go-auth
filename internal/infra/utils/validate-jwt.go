@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/henrique998/go-auth-2/internal/app/errors"
+	"github.com/henrique998/go-auth/internal/app/errors"
 )
 
 func ValidateJWTToken(tokenString string) (string, errors.AppErr) {

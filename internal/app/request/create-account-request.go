@@ -5,4 +5,5 @@ type CreateAccountRequest struct {
 	Email string `json:"email"`
 	Pass  string `json:"password"`
 	Phone string `json:"phone"`
+	Age   int8   `json:"age"`
 }

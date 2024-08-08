@@ -6,8 +6,9 @@ import (
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/limiter"
-	"github.com/henrique998/go-auth-2/internal/configs/logger"
-	"github.com/henrique998/go-auth-2/internal/infra/endpoints"
+	"github.com/henrique998/go-auth/internal/configs/logger"
+	"github.com/henrique998/go-auth/internal/infra/database"
+	"github.com/henrique998/go-auth/internal/infra/endpoints"
 	"github.com/joho/godotenv"
 )
 
@@ -16,6 +17,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	db := database.ConnectToDb()
+	defer db.Close()
 
 	app := fiber.New()
 
@@ -29,6 +33,6 @@ func main() {
 		},
 	}))
 
-	endpoints.SetupEndpoints(app)
+	endpoints.SetupAccountsEndpoints(app, db)
 	logger.Error("Project startup", app.Listen(":3333"))
 }

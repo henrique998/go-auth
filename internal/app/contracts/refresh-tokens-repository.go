@@ -1,0 +1,11 @@
+package contracts
+
+import (
+	"github.com/henrique998/go-auth/internal/app/entities"
+)
+
+type RefreshTokensRepository interface {
+	FindByValue(val string) entities.RefreshToken
+	Create(rt entities.RefreshToken) error
+	Delete(id string) error
+}
