@@ -25,6 +25,7 @@ type Account interface {
 	GetName() string
 	GetEmail() string
 	GetPass() *string
+	SetPass(pass string)
 	GetPhone() *string
 	GetAge() int8
 	GetProviderId() *string
@@ -53,6 +54,10 @@ func (u *account) GetEmail() string {
 
 func (u *account) GetPass() *string {
 	return u.pass
+}
+
+func (a *account) SetPass(pass string) {
+	a.pass = &pass
 }
 
 func (u *account) GetPhone() *string {

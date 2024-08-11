@@ -17,3 +17,11 @@ type GetAccountDevicesUsecase interface {
 type Send2faCodeUseCase interface {
 	Execute(accountId string) errors.AppErr
 }
+
+type SendNewPassRequestUseCase interface {
+	Execute(email string) errors.AppErr
+}
+
+type UpdatePassUseCase interface {
+	Execute(req request.NewPassRequest) errors.AppErr
+}
