@@ -24,6 +24,7 @@ type Device interface {
 	GetCreatedAt() time.Time
 	GetUpdatedAt() time.Time
 	GetLastLoginAt() time.Time
+	LoginNow()
 	Touch()
 }
 
@@ -53,6 +54,11 @@ func (d *device) GetIP() string {
 
 func (d *device) GetLastLoginAt() time.Time {
 	return d.lastLoginAt
+}
+
+func (d *device) LoginNow() {
+	now := time.Now()
+	d.lastLoginAt = now
 }
 
 func (d *device) GetCreatedAt() time.Time {

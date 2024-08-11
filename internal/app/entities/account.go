@@ -34,9 +34,13 @@ type Account interface {
 	GetIsEmailVerified() bool
 	VerifyEmail()
 	GetLastLoginAt() *time.Time
+	LoginNow()
 	GetLastLoginIp() *string
+	SetLastLoginIp(ip string)
 	GetLastLoginCountry() *string
+	SetLastLoginCountry(country string)
 	GetLastLoginCity() *string
+	SetLastLoginCity(city string)
 	GetCreatedAt() time.Time
 	GetUpdatedAt() *time.Time
 	Touch()
@@ -94,16 +98,33 @@ func (u *account) GetLastLoginAt() *time.Time {
 	return u.lastLoginAt
 }
 
-func (u *account) GetLastLoginIp() *string {
-	return u.lastLoginIp
+func (a *account) LoginNow() {
+	now := time.Now()
+	a.lastLoginAt = &now
+}
+
+func (a *account) GetLastLoginIp() *string {
+	return a.lastLoginIp
+}
+
+func (a *account) SetLastLoginIp(ip string) {
+	a.lastLoginIp = &ip
 }
 
 func (u *account) GetLastLoginCountry() *string {
 	return u.lastLoginCountry
 }
 
+func (a *account) SetLastLoginCountry(country string) {
+	a.lastLoginCountry = &country
+}
+
 func (u *account) GetLastLoginCity() *string {
 	return u.lastLoginCity
+}
+
+func (a *account) SetLastLoginCity(city string) {
+	a.lastLoginCity = &city
 }
 
 func (u *account) GetCreatedAt() time.Time {
