@@ -13,3 +13,7 @@ type CreateAccountUsecase interface {
 type GetAccountDevicesUsecase interface {
 	Execute(accountId string) ([]entities.Device, errors.AppErr)
 }
+
+type Send2faCodeUseCase interface {
+	Execute(accountId string) errors.AppErr
+}
