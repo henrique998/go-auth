@@ -35,6 +35,7 @@ func TestAccount_NewExistingAccount(t *testing.T) {
 	pass := "123456"
 	phone := "999999999"
 	var age int8 = 23
+	providerId := ""
 	now := time.Now()
 	lastLoginAt := now.Add(-1 * time.Hour)
 	lastLoginIp := "0.0.0.0"
@@ -48,15 +49,15 @@ func TestAccount_NewExistingAccount(t *testing.T) {
 		pass,
 		phone,
 		age,
-		"",
+		&providerId,
 		true,
 		false,
-		lastLoginAt,
-		lastLoginIp,
-		lastLoginCountry,
-		lastLoginCity,
+		&lastLoginAt,
+		&lastLoginIp,
+		&lastLoginCountry,
+		&lastLoginCity,
 		now,
-		now,
+		&now,
 	)
 
 	assert.NotNil(account)
