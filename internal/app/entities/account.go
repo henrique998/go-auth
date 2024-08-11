@@ -30,6 +30,7 @@ type Account interface {
 	GetAge() int8
 	GetProviderId() *string
 	GetIs2FaEnabled() bool
+	SetIs2FaEnabled(enabled bool)
 	GetIsEmailVerified() bool
 	GetLastLoginAt() *time.Time
 	GetLastLoginIp() *string
@@ -74,6 +75,10 @@ func (u *account) GetProviderId() *string {
 
 func (u *account) GetIs2FaEnabled() bool {
 	return u.is2faEnabled
+}
+
+func (a *account) SetIs2FaEnabled(enabled bool) {
+	a.is2faEnabled = enabled
 }
 
 func (u *account) GetIsEmailVerified() bool {

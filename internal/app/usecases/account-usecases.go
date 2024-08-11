@@ -25,3 +25,7 @@ type SendNewPassRequestUseCase interface {
 type UpdatePassUseCase interface {
 	Execute(req request.NewPassRequest) errors.AppErr
 }
+
+type Verify2faCodeUseCase interface {
+	Execute(req request.Verify2faCodeRequest) errors.AppErr
+}
