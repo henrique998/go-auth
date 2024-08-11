@@ -29,3 +29,7 @@ type UpdatePassUseCase interface {
 type Verify2faCodeUseCase interface {
 	Execute(req request.Verify2faCodeRequest) errors.AppErr
 }
+
+type VerifyEmailUseCase interface {
+	Execute(token string) errors.AppErr
+}

@@ -34,7 +34,7 @@ func (uc *verify2faCodeUseCase) Execute(req request.Verify2faCodeRequest) errors
 		return errors.NewAppErr("Two factor authentication already carried out", http.StatusUnauthorized)
 	}
 
-	account.SetIs2FaEnabled(true)
+	account.Enable2FA()
 	account.Touch()
 
 	uc.repo.Update(account)
