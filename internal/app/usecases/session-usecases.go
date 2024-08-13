@@ -8,3 +8,7 @@ import (
 type LoginWithCredentialsUseCase interface {
 	Execute(req request.LoginWithCredentialsRequest) (string, string, errors.AppErr)
 }
+
+type LoginWithGoogleUseCase interface {
+	Execute(data request.LoginWithGoogleRequest) (string, string, errors.AppErr)
+}
