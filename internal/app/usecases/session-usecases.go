@@ -12,3 +12,7 @@ type LoginWithCredentialsUseCase interface {
 type LoginWithGoogleUseCase interface {
 	Execute(data request.LoginWithGoogleRequest) (string, string, errors.AppErr)
 }
+
+type LoginWithMagicLinkUseCase interface {
+	Execute(req request.LoginWithMagicLinkRequest) (string, string, errors.AppErr)
+}

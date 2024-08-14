@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/gofiber/fiber/v3"
-	createaccountusecase "github.com/henrique998/go-auth/internal/app/usecases/create-account-usecase"
+	createaccountusecase "github.com/henrique998/go-auth/internal/app/usecases/account-usecases/create-account-usecase"
 	createaccountcontroller "github.com/henrique998/go-auth/internal/infra/controllers/create-account-controller"
 	"github.com/henrique998/go-auth/internal/infra/database/repositories"
 	"github.com/henrique998/go-auth/internal/infra/providers"
