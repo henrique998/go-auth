@@ -16,3 +16,7 @@ type LoginWithGoogleUseCase interface {
 type LoginWithMagicLinkUseCase interface {
 	Execute(req request.LoginWithMagicLinkRequest) (string, string, errors.AppErr)
 }
+
+type RefreshTokenUseCase interface {
+	Execute(refreshToken string) (string, string, errors.AppErr)
+}
