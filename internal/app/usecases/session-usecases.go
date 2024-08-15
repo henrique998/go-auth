@@ -20,3 +20,7 @@ type LoginWithMagicLinkUseCase interface {
 type RefreshTokenUseCase interface {
 	Execute(refreshToken string) (string, string, errors.AppErr)
 }
+
+type RequestMagicLinkUseCase interface {
+	Execute(email string) errors.AppErr
+}
