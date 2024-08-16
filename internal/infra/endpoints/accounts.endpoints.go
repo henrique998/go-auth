@@ -26,5 +26,5 @@ func SetupAccountsEndpoints(app *fiber.App, db *sql.DB) {
 	)
 	createAccountController := createaccountcontroller.NewCreateAccountController(createaccountusecase)
 
-	app.Get("/accounts", createAccountController.Handle)
+	app.Post("/accounts", createAccountController.Handle)
 }

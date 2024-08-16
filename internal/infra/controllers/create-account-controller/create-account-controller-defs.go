@@ -9,6 +9,6 @@ type createAccountController struct {
 	uc usecases.CreateAccountUsecase
 }
 
-func NewCreateAccountController(uc usecases.CreateAccountUsecase) controllers.CreateAccountController {
+func NewCreateAccountController(uc usecases.CreateAccountUsecase) controllers.Controller {
 	return &createAccountController{uc: uc}
 }
