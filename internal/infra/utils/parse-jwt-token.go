@@ -14,7 +14,7 @@ func ParseJWTToken(cookie, secret string) (string, appError.AppErr) {
 
 	if err != nil {
 		logger.Error("Error while parse cookie.", err)
-		return "", appError.NewAppErr("Internal server error.", 500)
+		return "", appError.NewInternalServerErr()
 	}
 
 	return claims.Sub, nil

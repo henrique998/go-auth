@@ -1,41 +1,39 @@
 package middlewares
 
 import (
-	"database/sql"
+	"errors"
+	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v3"
-	"github.com/henrique998/go-auth/internal/infra/database"
-	"github.com/henrique998/go-auth/internal/infra/database/repositories"
+	"github.com/henrique998/go-auth/internal/app/contracts"
+	"github.com/henrique998/go-auth/internal/configs/logger"
 	"github.com/henrique998/go-auth/internal/infra/utils"
 )
 
-func AuthMiddleware(db *sql.DB) fiber.Handler {
+func AuthMiddleware(repo contracts.AccountsRepository) fiber.Handler {
 	return func(c fiber.Ctx) error {
-		db := database.ConnectToDb()
-		defer db.Close()
 		accessTokenStr := c.Cookies("goauth:access_token")
 
 		if accessTokenStr == "" {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-				"error": "Unauthorized - No token provided",
+				"error": "Unauthorized - Token not present",
 			})
 		}
 
 		accountId, err := utils.ParseJWTToken(accessTokenStr, os.Getenv("JWT_SECRET"))
 		if err != nil {
-			return c.JSON(fiber.Map{
-				"error": err.GetMessage(),
+			logger.Error("Parse token error", errors.New(err.GetMessage()))
+			return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Token is malformed",
 			})
 		}
-
-		repo := repositories.PGAccountsRepository{Db: db}
 
 		account := repo.FindById(accountId)
 
 		if account == nil {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-				"error": "Unauthorized - Account not found!",
+				"error": "Unauthorized - Account not found",
 			})
 		}
 
