@@ -6,8 +6,8 @@ import (
 	"github.com/gofiber/fiber/v3"
 	createaccountusecase "github.com/henrique998/go-auth/internal/app/usecases/account-usecases/create-account-usecase"
 	getaccountdevicesusecase "github.com/henrique998/go-auth/internal/app/usecases/account-usecases/get-account-devices-usecase"
-	createaccountcontroller "github.com/henrique998/go-auth/internal/infra/controllers/create-account-controller"
-	getaccountdevicescontroller "github.com/henrique998/go-auth/internal/infra/controllers/get-account-devices-controller"
+	createaccountcontroller "github.com/henrique998/go-auth/internal/infra/controllers/accounts-controllers/create-account-controller"
+	getaccountdevicescontroller "github.com/henrique998/go-auth/internal/infra/controllers/accounts-controllers/get-account-devices-controller"
 	"github.com/henrique998/go-auth/internal/infra/database/repositories"
 	"github.com/henrique998/go-auth/internal/infra/providers"
 )

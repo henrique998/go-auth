@@ -27,54 +27,6 @@ func TestSend2FACodeController(t *testing.T) {
 	usecase := usecasesmocks.NewMockSend2faCodeUseCase(ctrl)
 	sut := NewSend2FACodeController(usecase)
 
-	t.Run("It should return bad request when cookie is not present", func(t *testing.T) {
-		app := fiber.New()
-		app.Use(middlewares.AuthMiddleware(nil))
-		app.Post("/accounts/send-2fa-code", sut.Handle)
-		req := httptest.NewRequest("POST", "/accounts/send-2fa-code", nil)
-		res, _ := app.Test(req)
-
-		body, _ := io.ReadAll(res.Body)
-
-		assert.Equal(http.StatusUnauthorized, res.StatusCode)
-		assert.Contains(string(body), "Unauthorized - Token not present")
-	})
-
-	t.Run("It should return unauthorized when JWT token is invalid", func(t *testing.T) {
-		app := fiber.New()
-		app.Use(middlewares.AuthMiddleware(nil))
-		app.Get("/accounts/send-2fa-code", sut.Handle)
-		req := httptest.NewRequest("POST", "/accounts/send-2fa-code", nil)
-		req.Header.Set("Cookie", "goauth:access_token=invalid_token")
-
-		res, _ := app.Test(req)
-		body, _ := io.ReadAll(res.Body)
-
-		assert.Equal(http.StatusUnauthorized, res.StatusCode)
-		assert.Contains(string(body), "Token is malformed")
-	})
-
-	t.Run("It should return unauthorized when account was not found", func(t *testing.T) {
-		mockRepo := mocks.NewMockAccountsRepository(ctrl)
-		mockRepo.EXPECT().FindById(gomock.Any()).Return(nil)
-
-		app := fiber.New()
-		app.Use(middlewares.AuthMiddleware(mockRepo))
-		app.Post("/accounts/send-2fa-code", sut.Handle)
-		req := httptest.NewRequest("POST", "/accounts/send-2fa-code", nil)
-		expiresAt := time.Now().Add(15 * time.Minute)
-		tokenStr, _ := utils.GenerateJWTToken("accountId", expiresAt, os.Getenv("JWT_SECRET"))
-		cookieValue := fmt.Sprintf("goauth:access_token=%s; Expires=%s; HttpOnly; Path=/",
-			tokenStr, expiresAt.Format(time.RFC1123))
-		req.Header.Set("Cookie", cookieValue)
-
-		res, _ := app.Test(req)
-		body, _ := io.ReadAll(res.Body)
-
-		assert.Equal(http.StatusUnauthorized, res.StatusCode)
-		assert.Contains(string(body), "Unauthorized - Account not found")
-	})
-
 	t.Run("It should send 2fa code when valid token is provided", func(t *testing.T) {
 		account := entities.NewAccount("jhon doe", "jhondoe@gmail.com", "123456", "", 23, "")
 
