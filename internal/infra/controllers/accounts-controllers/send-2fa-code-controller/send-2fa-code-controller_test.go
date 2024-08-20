@@ -27,7 +27,7 @@ func TestSend2FACodeController(t *testing.T) {
 	usecase := usecasesmocks.NewMockSend2faCodeUseCase(ctrl)
 	sut := NewSend2FACodeController(usecase)
 
-	t.Run("It should send 2fa code when valid token is provided", func(t *testing.T) {
+	t.Run("It should send 2fa code", func(t *testing.T) {
 		account := entities.NewAccount("jhon doe", "jhondoe@gmail.com", "123456", "", 23, "")
 
 		mockRepo := mocks.NewMockAccountsRepository(ctrl)
