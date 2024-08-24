@@ -34,5 +34,6 @@ func main() {
 	}))
 
 	endpoints.SetupAccountsEndpoints(app, db)
+	endpoints.SetupSessionEndpoints(app, db)
 	logger.Error("Project startup", app.Listen(":3333"))
 }
