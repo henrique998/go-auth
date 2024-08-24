@@ -8,4 +8,4 @@ RUN go build -o goauth ./cmd/api
 FROM alpine:3.18 as binary
 COPY --from=base /app/main .
 EXPOSE 3333
-CMD [ "./main" ]
+CMD [ "./goauth" ]
