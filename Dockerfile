@@ -6,6 +6,7 @@ COPY . .
 RUN go build -o main ./cmd/api
 
 FROM alpine:latest
-COPY --from=builder ./app/main .
+WORKDIR /app
+COPY --from=builder ./cmd/api/main .
 EXPOSE 3333
 CMD ["./main"]
