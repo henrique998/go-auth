@@ -3,9 +3,9 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN go build  ./cmd/api
+RUN go build -o main ./cmd/api
 
-FROM alpine:3.18
-COPY --from=builder ./app ./
+FROM alpine:latest
+COPY --from=builder ./app/main .
 EXPOSE 3333
 CMD ["./main"]
